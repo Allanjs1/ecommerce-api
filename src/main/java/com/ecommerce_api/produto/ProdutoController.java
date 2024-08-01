@@ -1,11 +1,13 @@
 package com.ecommerce_api.produto;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,13 @@ public class ProdutoController {
     @GetMapping
     public List<Produto> findAll() {
         return produtoService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Produto> getProdutoId(@PathVariable Long id) {
+        Optional<Produto> produto = produtoService.findById(id);
+        return produto.map(ResponseEntity::ok).orElseGet(()
+                -> ResponseEntity.notFound().build());
     }
 
 }
