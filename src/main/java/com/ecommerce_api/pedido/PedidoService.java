@@ -12,11 +12,11 @@ public class PedidoService {
     @Autowired
     private PedidoRepository repository;
 
-    public Pedido register(Pedido pedido) {
+    public Pedido adicionarPedido(Pedido pedido) {
         return repository.save(pedido);
     }
 
-    public List<Pedido> findAll() {
+    public List<Pedido> listarPedidos() {
         return repository.findAll();
     }
 
